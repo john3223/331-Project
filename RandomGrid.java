@@ -20,7 +20,6 @@ public class RandomGrid {
         this.hazardWeight = hazardWeight;
         this.wallWeight = wallWeight;
         this.jackpots = jackpots;
-        ;
     }
 
     // Getters for the grid properties
