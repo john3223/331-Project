@@ -58,6 +58,6 @@ public class RandomGrid {
 
     public void toHazard(int i, int j) {
 
-
+    @Override
     public String toString() {
 
