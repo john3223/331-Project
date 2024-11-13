@@ -2,12 +2,12 @@
  * Enum for different square types. We haven't used enum types much.
  */
 public enum SquareType {
-    GREEN("Green"),
-    YELLOW("Yellow"),
-    RED("Red"),
-    HAZARD("Hazard"),
-    WALL("Wall"),
-    JACKPOT("Jackpot");
+    GREEN("G"),
+    YELLOW("Y"),
+    RED("R"),
+    HAZARD("H"),
+    WALL("W"),
+    JACKPOT("J");
 
     private final String text;
 
