@@ -56,8 +56,8 @@ public class RandomGrid {
     }
 
 
-    //public void toHazard(int i, int j) {
+    public void toHazard(int i, int j) {
 
 
-    //public String toString() {
+    public String toString() {
 
