@@ -1,4 +1,4 @@
-public class Player{
+.public class Player{
 
     private int xPosition;
     private int yPosition;
@@ -12,16 +12,16 @@ public class Player{
 
     //method calling Move to make move
     public void makeMove(Move move){
-        if(direction.RIGHT){
+        if(Move.getDirection.equals(direction.RIGHT)){
             this.yPosition + Move.getDistance() = move;
         }
-        if(direction.LEFT){
+        if(Move.getDirection.equals(direction.LEFT)){
             this.yPosition + Move.getDistance() = move;
         }
-        if(direction.UP){
+        if(Move.getDirection.equals(direction.UP)){
             this.xPosition + Move.getDistance() = move;
         }
-        if(direction.DOWN){
+        if(Move.getDirection.equals(direction.DOWN)){
             this.xPosition + Move.getDistance() = move;
         }
     }
