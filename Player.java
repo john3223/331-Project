@@ -12,7 +12,18 @@ public class Player{
 
     //method calling Move to make move
     public void makeMove(Move move){
-        Move move = new Move();
+        if(direction.RIGHT){
+            this.yPosition + Move.getDistance() = move;
+        }
+        if(direction.LEFT){
+            this.yPosition + Move.getDistance() = move;
+        }
+        if(direction.UP){
+            this.xPosition + Move.getDistance() = move;
+        }
+        if(direction.DOWN){
+            this.xPosition + Move.getDistance() = move;
+        }
     }
 
     //accessors
@@ -31,6 +42,6 @@ public class Player{
 
     @Override
     public String toString() {
-        return super.toString() + "Position: " + xPosition + ", " + yPosition;
+        return String.format("%s%d%s%d%n","Position: ", xPosition, ", " yPosition);
     }
 }
