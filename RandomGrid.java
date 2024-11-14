@@ -9,6 +9,7 @@ public class RandomGrid {
     private double hazardWeight;
     private double wallWeight;
     private int jackpots;
+    private Square[][] grid;
 
     // Constructor to initialize the grid with the specified parameters
     public RandomGrid(int width, int height, double greenWeight, double yellowWeight, double redWeight, double hazardWeight, double wallWeight, int jackpots) {
@@ -20,6 +21,7 @@ public class RandomGrid {
         this.hazardWeight = hazardWeight;
         this.wallWeight = wallWeight;
         this.jackpots = jackpots;
+        this.grid = new Square[height][width];
     }
 
     // Getters for the grid properties
