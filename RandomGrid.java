@@ -60,4 +60,7 @@ public class RandomGrid {
 
     @Override
     public String toString() {
+        return String.format("Grid Dimensions: %dx%d%nGreen Weight: %.2f%nYellow Weight: %.2f%nRed Weight: %.2f%nHazard Weight: %.2f%nWall Weight: %.2f%nJackpots: %d",
+            width, height, greenWeight, yellowWeight, redWeight, hazardWeight, wallWeight, jackpots);
+    }
 
