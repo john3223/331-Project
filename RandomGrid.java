@@ -59,18 +59,18 @@ public class RandomGrid {
 
 
     public void toHazard(int i, int j) {
-    if (i >= 0) {
-        if (i < height) {
-            if (j >= 0) {
-                if (j < width) {
-                    if (grid[i][j] != null) {
-                        grid[i][j].setToHazard();
+        if (i >= 0) {
+            if (i < height) {
+                if (j >= 0) {
+                    if (j < width) {
+                        if (grid[i][j] != null) {
+                            grid[i][j].setToHazard();
+                        }
                     }
                 }
             }
         }
     }
-}
 
     @Override
     public String toString() {
