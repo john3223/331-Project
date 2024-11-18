@@ -72,6 +72,44 @@ public class RandomGrid {
         }
     }
 
+    // Function to initialize the grid
+    public void initializeGrid() {
+        Random random = new Random();
+
+        // Calculate total weight for non-jackpot squares
+        double totalWeight = greenWeight + yellowWeight + redWeight + hazardWeight + wallWeight;
+
+        //Jackpot squares
+        for (int k = 0; k < jackpots; k++) {
+            int i, j;
+            do {
+                i = random.nextInt(height);
+                j = random.nextInt(width);
+            } while (grid[i][j] != null); 
+            grid[i][j] = new Square(0, SquareType.JACKPOT); 
+        }
+
+        // Initializing the remaining grid
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (grid[i][j] == null) { // Skip if already assigned as a jackpot
+                    double randValue = random.nextDouble() * totalWeight;
+                    if (randValue < greenWeight) {
+                        grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.GREEN); 
+                    } else if (randValue < greenWeight + yellowWeight) {
+                        grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.YELLOW);
+                    } else if (randValue < greenWeight + yellowWeight + redWeight) {
+                        grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.RED);
+                    } else if (randValue < greenWeight + yellowWeight + redWeight + hazardWeight) {
+                        grid[i][j] = new Square(0, SquareType.HAZARD); 
+                    } else {
+                        grid[i][j] = new Square(0, SquareType.WALL); 
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("Grid Dimensions: %dx%d%nGreen Weight: %.2f%nYellow Weight: %.2f%nRed Weight: %.2f%nHazard Weight: %.2f%nWall Weight: %.2f%nJackpots: %d",
