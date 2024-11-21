@@ -57,36 +57,63 @@ public class RandomGrid {
         return jackpots;
     }
 
-
-    public void toHazard(int i, int j) {
-        if (i >= 0) {
-            if (i < height) {
-                if (j >= 0) {
-                    if (j < width) {
-                        if (grid[i][j] != null) {
-                            grid[i][j].setToHazard();
-                        }
-                    }
-                }
-            }
+    // Method to adjust difficulty and change square weights accordingly
+    public void adjustDifficulty(String difficulty) {
+        switch (difficulty.toLowerCase()) {
+            case "easy":
+                greenWeight = 0.5;
+                yellowWeight = 0.3;
+                redWeight = 0.1;
+                hazardWeight = 0.05;
+                wallWeight = 0.05;
+                break;
+            case "medium":
+                greenWeight = 0.3;
+                yellowWeight = 0.3;
+                redWeight = 0.2;
+                hazardWeight = 0.1;
+                wallWeight = 0.1;
+                break;
+            case "hard":
+                greenWeight = 0.2;
+                yellowWeight = 0.2;
+                redWeight = 0.3;
+                hazardWeight = 0.15;
+                wallWeight = 0.15;
+                break;
+            case "volcanic":
+                greenWeight = 0.1;
+                yellowWeight = 0.1;
+                redWeight = 0.3;
+                hazardWeight = 0.2;
+                wallWeight = 0.3;
+                break;
+            default:
+                // Default to medium if no valid difficulty is provided
+                greenWeight = 0.3;
+                yellowWeight = 0.3;
+                redWeight = 0.2;
+                hazardWeight = 0.1;
+                wallWeight = 0.1;
+                break;
         }
     }
 
-    // Function to initialize the grid
+    // Function to initialize the grid based on adjusted weights
     public void initializeGrid() {
         Random random = new Random();
 
         // Calculate total weight for non-jackpot squares
         double totalWeight = greenWeight + yellowWeight + redWeight + hazardWeight + wallWeight;
 
-        //Jackpot squares
+        // Jackpot squares
         for (int k = 0; k < jackpots; k++) {
             int i, j;
             do {
                 i = random.nextInt(height);
                 j = random.nextInt(width);
-            } while (grid[i][j] != null); 
-            grid[i][j] = new Square(0, SquareType.JACKPOT); 
+            } while (grid[i][j] != null);  // Skip if the square is already assigned
+            grid[i][j] = new Square(0, SquareType.JACKPOT);  // Assign jackpot to the square
         }
 
         // Initializing the remaining grid
@@ -94,18 +121,29 @@ public class RandomGrid {
             for (int j = 0; j < width; j++) {
                 if (grid[i][j] == null) { // Skip if already assigned as a jackpot
                     double randValue = random.nextDouble() * totalWeight;
+
+                    // Assign square types based on random value and weight distribution
                     if (randValue < greenWeight) {
-                        grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.GREEN); 
+                        grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.GREEN); // Random number 1-10
                     } else if (randValue < greenWeight + yellowWeight) {
                         grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.YELLOW);
                     } else if (randValue < greenWeight + yellowWeight + redWeight) {
                         grid[i][j] = new Square(random.nextInt(10) + 1, SquareType.RED);
                     } else if (randValue < greenWeight + yellowWeight + redWeight + hazardWeight) {
-                        grid[i][j] = new Square(0, SquareType.HAZARD); 
+                        grid[i][j] = new Square(0, SquareType.HAZARD); // Number automatically set to 0
                     } else {
-                        grid[i][j] = new Square(0, SquareType.WALL); 
+                        grid[i][j] = new Square(0, SquareType.WALL); // Number automatically set to 0
                     }
                 }
+            }
+        }
+    }
+
+    // Method to convert a square to a hazard (useful when a player lands on a square)
+    public void toHazard(int i, int j) {
+        if (i >= 0 && i < height && j >= 0 && j < width) {
+            if (grid[i][j] != null) {
+                grid[i][j].setToHazard();
             }
         }
     }
@@ -115,4 +153,4 @@ public class RandomGrid {
         return String.format("Grid Dimensions: %dx%d%nGreen Weight: %.2f%nYellow Weight: %.2f%nRed Weight: %.2f%nHazard Weight: %.2f%nWall Weight: %.2f%nJackpots: %d",
             width, height, greenWeight, yellowWeight, redWeight, hazardWeight, wallWeight, jackpots);
     }
-
+}
