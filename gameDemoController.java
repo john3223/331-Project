@@ -27,7 +27,7 @@ public class gameDemoController {
     @FXML
     private Button newGameButton;
 
-    // Declare the RandomGrid object and other necessary variables
+    
     private RandomGrid randomGrid;
     private int width = 10; // Default width
     private int height = 10; // Default height
@@ -49,7 +49,7 @@ public class gameDemoController {
         // Reset the score field
         scoreTextField.setText("0");
 
-        // Provide feedback to the user
+        
         showAlert("New Game", "A new game has started with " + difficulty + " difficulty.");
     }
 
