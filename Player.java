@@ -1,47 +1,42 @@
-.public class Player{
+package com.example.gamedemo;
 
+import javafx.scene.shape.Sphere;
+
+public class Player {
     private int xPosition;
     private int yPosition;
+    private Direction direction;
+    private Sphere player;
 
-
-    //constructor
-    Player(int xPosition, int yPosition){
+    public Player(int xPosition, int yPosition, Sphere player) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
+        this.player = player;
     }
+    public void Move(Direction direction, Square square) {
+        int distance = square.getNumber();
+        switch (direction) {
+            case RIGHT:
+                this.yPosition += distance;
+                break;
+            case LEFT:
+                this.yPosition -= distance;
+                break;
+            case UP:
+                this.xPosition += distance;
+                break;
+            case DOWN:
+                this.xPosition -= distance;
+                break;
+        }
+    }
+    public int getxPosition() {return xPosition;}
+    public int getyPosition() {return yPosition;}
+    public Sphere getPlayer() {return player;}
 
-    //method calling Move to make move
-    public void makeMove(Move move){
-        if(Move.getDirection.equals(Direction.RIGHT)){
-            this.yPosition += Move.getDistance() = move;
-        }
-        if(Move.getDirection.equals(Direction.LEFT)){
-            this.yPosition -= Move.getDistance() = move;
-        }
-        if(Move.getDirection.equals(Direction.UP)){
-            this.xPosition += Move.getDistance() = move;
-        }
-        if(Move.getDirection.equals(Direction.DOWN)){
-            this.xPosition -= Move.getDistance() = move;
-        }
-    }
-
-    //accessors
-    public int getXPosition() {
-        return xPosition;
-    }
-    public int getYPosition() {
-        return yPosition;
-    }
-
-    //mutator
     public void setPosition(int x, int y) {
         this.xPosition = x;
         this.yPosition = y;
     }
-
-    @Override
-    public String toString() {
-        return String.format("%s%d%s%d%n","Position: ", xPosition, ", " yPosition);
-    }
+    public void setPlayer(Sphere player) {this.player = player;}
 }

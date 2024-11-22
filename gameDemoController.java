@@ -1,79 +1,95 @@
-import javafx.event.ActionEvent;
+package com.example.gamedemo;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
+import javafx.geometry.HPos;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Rectangle;
+import java.util.Random;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Sphere;
+import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
 
 public class gameDemoController {
 
     @FXML
-    private TextField scoreTextField;
+    TextField scoreTextField, statusTextField;
 
     @FXML
-    private RadioButton easyButton;
+    ToggleGroup difficulty;
 
     @FXML
-    private RadioButton mediumButton;
+    ToggleButton easyToggleButton, mediumToggleButton, hardToggleButton, volcanicToggleButton;
 
     @FXML
-    private RadioButton hardButton;
+    GridPane squareGrid;
 
     @FXML
-    private RadioButton volcanicButton;
+    Sphere player;
 
-    @FXML
-    private Button newGameButton;
+    Random random = new Random();
 
-    
-    private RandomGrid randomGrid;
-    private int width = 10; // Default width
-    private int height = 10; // Default height
-    private int jackpots = 3; // Example number of jackpots
+    private void fillGrid(GridPane squareGrid) {
+        for (int row = 0; row < 7; row++) {
+            for (int col = 0; col < 12; col++) {
+                Square square = new Square(0, getRandomColor.getRandomValue(SquareType.class), new Rectangle(row, col, 50, 50));
+                square.getSquare().setFill(Color.web(String.valueOf(square.getSquareType())));
+                square.getSquare().setOnMouseClicked(event -> handleClick(event, square.getSquare()));
 
-    // Event handler for the 'New Game' button
-    @FXML
-    void newGame(ActionEvent event) {
-        // Determine the difficulty selected by the user
-        String difficulty = getSelectedDifficulty();
+                TextField squareNum = new TextField(String.valueOf(square.getNumber()));
+                squareNum.setEditable(false);
+                squareNum.setMaxWidth(25);
+                GridPane.setHalignment(squareNum, HPos.CENTER);
+                //squareNum.setOnMouseClicked(event -> handleClick(event, squareNum));
 
-        // Adjust the difficulty of the RandomGrid
-        randomGrid = new RandomGrid(width, height, 0.3, 0.3, 0.2, 0.1, 0.1, jackpots); // Example weight values
-        randomGrid.adjustDifficulty(difficulty);  // Adjust weights based on difficulty
-
-        // Initialize the grid with the adjusted difficulty settings
-        randomGrid.initializeGrid();
-
-        // Reset the score field
-        scoreTextField.setText("0");
-
-        
-        showAlert("New Game", "A new game has started with " + difficulty + " difficulty.");
-    }
-
-    // Get the currently selected difficulty from the ToggleGroup
-    private String getSelectedDifficulty() {
-        if (easyButton.isSelected()) {
-            return "easy";
-        } else if (mediumButton.isSelected()) {
-            return "medium";
-        } else if (hardButton.isSelected()) {
-            return "hard";
-        } else if (volcanicButton.isSelected()) {
-            return "volcanic";
-        } else {
-            return "medium"; // Default to medium if none selected
+                squareGrid.add(square.getSquare(), col, row);
+                squareGrid.add(squareNum, col, row);
+            }
         }
+
     }
 
-    // Utility method to show an alert
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    private void handleClick(MouseEvent event, Rectangle square) {
+
+    }
+    Node n ;
+    private Node getLocation(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            int nCol = GridPane.getColumnIndex(node);
+            int nRow = GridPane.getRowIndex(node);
+
+            if (nCol == col && nRow == row) {
+                n = node;
+            }
+        }
+        return n;
+    }
+
+
+    @FXML
+    public void initialize() {
+        fillGrid(squareGrid);
+        //Player display = new Player(random.nextInt(12), random.nextInt(7), player);
+
+
+    }
+
+
+    @FXML
+    private void newGame(ActionEvent event) {
+        initialize();
     }
 }
+/*
+Player display = new Player(random.nextInt(12), random.nextInt(7), player);
+        if (Integer.toString(0).equals(((TextField) getLocation(squareGrid, display.getxPosition(), display.getyPosition())).getText())) {
+            initialize();
+        } else {
+            squareGrid.add(display.getPlayer(), display.getxPosition(), display.getyPosition());
+        }
+ */
+
