@@ -1,42 +1,33 @@
+/**
+ * ==============================================================================================
+ * PROGRAM PURPOSE: Create player class with xPosition, yPositions, and a textfield
+ * ===============================================================================================
+ */
 package com.example.gamedemo;
 
-import javafx.scene.shape.Sphere;
+import javafx.scene.control.TextField;
 
 public class Player {
     private int xPosition;
     private int yPosition;
-    private Direction direction;
-    private Sphere player;
+    private TextField player;
 
-    public Player(int xPosition, int yPosition, Sphere player) {
+    // player constructor
+    public Player(int xPosition, int yPosition, TextField player) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.player = player;
     }
-    public void Move(Direction direction, Square square) {
-        int distance = square.getNumber();
-        switch (direction) {
-            case RIGHT:
-                this.yPosition += distance;
-                break;
-            case LEFT:
-                this.yPosition -= distance;
-                break;
-            case UP:
-                this.xPosition += distance;
-                break;
-            case DOWN:
-                this.xPosition -= distance;
-                break;
-        }
-    }
+
+    // create accessors.
     public int getxPosition() {return xPosition;}
     public int getyPosition() {return yPosition;}
-    public Sphere getPlayer() {return player;}
+    public TextField getPlayer() {return player;}
 
+    // create modifier for position
     public void setPosition(int x, int y) {
         this.xPosition = x;
         this.yPosition = y;
     }
-    public void setPlayer(Sphere player) {this.player = player;}
+    public void setPlayer(TextField player) {this.player = player;}
 }

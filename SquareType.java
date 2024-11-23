@@ -1,3 +1,8 @@
+/**
+ * ==============================================================================================
+ * PROGRAM PURPOSE: Create enum of different colors in the GridPane.
+ * ===============================================================================================
+ */
 package com.example.gamedemo;
 
 public enum SquareType {
@@ -16,14 +21,13 @@ public enum SquareType {
 
     public String getText() {return text;}
 
-    public static SquareType getEnum(String text) {
-        for (SquareType squareType : values()) {
-            if (squareType.getText().equals(text)) {
-                return squareType;
-            }
-        }
-        throw new IllegalArgumentException("No enum constant");
+    // Create static method to return color web from hexadecimal.
+
+    public static String getHex(String hex) {
+        String answer = "#" + hex.substring(2, 8);
+        return answer;
     }
+
 
     @Override
     public String toString() {
